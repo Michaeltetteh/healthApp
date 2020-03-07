@@ -1,0 +1,50 @@
+{% extends 'base.html' %} {% load static %} {% block head %}
+<link rel="stylesheet" href="{% static '/patients/css/notification.css' %}">
+<link rel="stylesheet" href="{% static '/patients/css/charts.css' %}"> {% endblock %} {% block chart %}
+<div class="container-fluid">
+    <div class="jumbotron" id="chart-jumbo">
+        <div class="dropdown-animation form-row">
+            <!-- <h1 id="room-name" value="{{device}}">{{device}}</h1> -->
+            <a class="dropdown-toggle2" href="#" id="sandwichDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i id="dropdown-button" class="fas fa-ellipsis-h"></i>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right dropdown-container" id="" aria-labelledby="sandwichDropdown">
+                <p class="dropdown">Datapoints:</p>
+                <div class="dpCounter">
+                    <input class="btn btn-outline-secondary vBt" type="button" name="subBt" id="subBt" onclick="subDatapoint()" value="-">
+                    <input class="dropdown-item form-control form-control-sm dropdown-input" id="datapoints-input" type="text" name="datapointsCount" value="30">
+                    <input class="btn btn-outline-secondary vBt" type="button" name="addBt" id="addBt" onclick="addDatapoint()" value="+">
+                </div>
+                <input class="submitBt btn btn-primary dropdown-submit" type="button" name="submitBt" onclick="updateChart()" value="Update">
+            </div>
+        </div>
+        <div class="chart-container">
+            <canvas id="{{ device }}-pulse" width="50%" height="50%"></canvas>
+        </div>
+    </div>
+</div>
+{% endblock %} {% block jquery %}
+<script type="text/javascript">
+    var deviceValue = "{{device}}";
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.js" type="text/javascript"></script>
+<script src="{% static '/patients/js/charts.js' %}" type="text/javascript"></script>
+
+<script type="text/javascript">
+    $(window).on('load', function() {
+        var chartValues = chartPulse("{{device}}", 30, "true");
+    })
+
+    $('.dropdown-animation').on('show.bs.dropdown', function(e) {
+        $(this).find('.dropdown-menu').first().stop(true, true).slideDown(200);
+    });
+
+    $('.dropdown-animation').on('hide.bs.dropdown', function(e) {
+        $(this).find('.dropdown-menu').first().stop(true, true).slideUp(150);
+    });
+</script>
+
+{% endblock %}
+
+</blockquote>

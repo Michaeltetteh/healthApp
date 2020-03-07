@@ -1,0 +1,120 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <title>Veltrix - Admin Dashboard Template | Themesbrand</title>
+    <meta content="Responsive admin theme build on top of Bootstrap 4" name="description" />
+    <meta content="Themesbrand" name="author" />
+    <link rel="shortcut icon" href="{% static 'assets/images/favicon.ico' %}">
+
+    <link href="{% static 'assets/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'assets/css/metismenu.min.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'assets/css/icons.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'assets/css/style.css' %}" rel="stylesheet" type="text/css">
+</head>
+
+<body class="bg-primary">
+    <div class="home-btn d-none d-sm-block">
+        <a href="{% url 'index' %}" class="text-white"><i class="fas fa-home h2"></i></a>
+    </div>
+
+    <div class="account-pages my-5 pt-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-8 col-lg-6 col-xl-5">
+                    <div class="card bg-pattern shadow-none">
+                        <div class="card-body">
+                            <div class="text-center mt-4">
+                                <div class="mb-3">
+                                    <a href="{% url 'index' %}" class="logo"><img src="{% static 'assets/images/logo-dark.png' %}" height="20" alt="logo"></a>
+                                </div>
+                            </div>
+                            <div class="p-3">
+                                <h4 class="font-18 text-center">Free Register</h4>
+                                <p class="text-muted text-center mb-4">Get your free Veltrix account now.</p>
+                                <form  action="{% url 'register' %}" method="post" novalidate>
+                                  {% csrf_token %}
+                                    <div class="form-group">
+                                        <label for="useremail">Email</label>
+                                        <input type="email" class="form-control" name="email" 
+                                        placeholder="Enter email">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="username">Username</label>
+                                        <input type="text" class="form-control" 
+                                        placeholder="Enter username" name="username" required>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="first_name">First_name</label>
+                                        <input type="text" class="form-control" 
+                                         placeholder="Enter first_name" name="first_name" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="last_name">Last_name</label>
+                                        <input type="text" class="form-control" 
+                                         placeholder="Enter last_name" name="last_name" required>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="password">Password</label>
+                                        <input type="password" class="form-control" name="password"
+                                         placeholder="Enter password" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="password_2">Password</label>
+                                        <input type="password" class="form-control"  
+                                        name="password_2" placeholder="re-enter password" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="gender">Gender</label>
+                                        <input type="text" class="form-control" 
+                                        name="gender" placeholder="Enter Gender" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="specialty">Specialty</label>
+                                        <input type="text" class="form-control"
+                                        name="specialty" placeholder="Your specialty" required>
+                                    </div>
+                                    <div class="mt-4">
+                                        <button class="btn btn-primary btn-block waves-effect waves-light"
+                                         type="submit">Register</button>
+                                    </div>
+
+                                    <div class="mt-4 text-center">
+                                        <p class="mb-0">By registering you agree to the Veltrix <a href="#" class="text-primary">Terms of Use</a></p>
+                                    </div>
+                                </form>
+
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="mt-5 text-center text-white-50">
+                        <p>Already have an account ? <a href="{% url 'indexPage' %}" class="font-500 text-white"> Login </a> </p>
+                        <p>© 2019 Veltrix. Crafted with <i class="mdi mdi-heart text-danger"></i> by Themesbrand</p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- jQuery  -->
+    <script src="{% static 'assets/js/jquery.min.js'%}"></script>
+    <script src="{% static 'assets/js/bootstrap.bundle.min.js'%}"></script>
+    <script src="{% static 'assets/js/metismenu.min.js' %}"></script>
+    <script src="{% static 'assets/js/jquery.slimscroll.js' %}"></script>
+    <script src="{% static 'assets/js/waves.min.js' %}"></script>
+
+    <!-- App js -->
+    <script src="{% static 'assets/js/app.js' %}"></script>
+
+</body>
+</html>

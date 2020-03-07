@@ -1,0 +1,145 @@
+{% extends 'base.html' %} 
+
+{% load static %} 
+
+{% block title %}
+<title>Patients Home page</title>
+{% endblock title %}
+
+{% block head %}
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="stylesheet" href="{% static 'patients/css/notification.css' %}"> 
+{% endblock %} 
+
+{% block sidebar %}
+    <!-- ========== Left Sidebar Start ========== -->
+<div class="left side-menu">
+    <div class="slimscroll-menu" id="remove-scroll">
+        <!--- Sidemenu -->
+        <div id="sidebar-menu">
+            <!-- Left Menu Start -->
+            <ul class="metismenu" id="side-menu">
+                <li class="menu-title">Overview</li>
+                <li>
+                    <a href="{% url 'patients:patient-homepage' %}" class="waves-effect">
+                        <i class="ion ion-md-speedometer"></i>
+                        <!-- <span class="badge badge-success badge-pill float-right">2</span> -->
+                        <span> Pulse Details </span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{% url 'patients:patient-homepage' %}" class="waves-effect">
+                        <i class="ion ion-md-speedometer"></i>
+                        <!-- <span class="badge badge-success badge-pill float-right">2</span> -->
+                        <span> Temperature Details </span>
+                    </a>
+                </li>
+
+            </ul>
+
+        </div>
+        <!-- Sidebar -->
+        <div class="clearfix"></div>
+
+    </div>
+    <!-- Sidebar -left -->
+
+</div>
+<!-- Left Sidebar End -->
+{% endblock sidebar %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="page-title-box">
+        <div class="row align-items-center">
+            <div class="col-sm-6">
+                <h4 class="page-title">Dashboard</h4>
+                <ol class="breadcrumb">
+                    <!-- <li class="breadcrumb-item"><a href="javascript:void(0);"><i class="mdi mdi-home-outline"></i></a></li> -->
+                    <li class="breadcrumb-item active">Login patient</li>
+                </ol>
+            </div>
+        </div>
+        <!-- end row -->
+    </div>
+    <!-- end page-title -->
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card mini-stat bg-pattern">
+                <div class="card-body mini-stat-img">
+                    <div class="mini-stat-icon">
+                        <i class="dripicons-broadcast bg-soft-primary text-primary float-right h4"></i>
+                    </div>
+                    <h6 class="text-uppercase mb-3 mt-0">My vitals</h6>
+                    <div class="row">
+                        <div class="col">
+                            <a href="{% url 'pulse_chart' 'tee'%}">
+                                <button type="button" class="btn btn-primary btn-icon">
+                                    <span class="btn-icon-label"><i class="mdi mdi-bullseye-arrow mr-2"></i></span> Pulse
+                                </button>
+                            </a>
+                        </div>
+                        <div class="col">
+                            <button type="button" class="btn btn-warning btn-icon">
+                                <span class="btn-icon-label"><i class="mdi mdi-alert-outline mr-2"></i></span>Temperature
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+    <!-- end row -->
+</div>
+{% endblock %}
+
+{% block profile %}
+<li class="dropdown notification-list list-inline-item">
+    <div class="dropdown notification-list nav-pro-img">
+        <a class="dropdown-toggle nav-link arrow-none nav-user" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+            <img src="{% static 'assets/images/users/user-4.jpg' %}" alt="user" class="rounded-circle">
+        </a>
+        <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
+            <!-- item-->
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item text-danger" href="{% url 'accounts:patient-logout' %}">
+            <i class="mdi mdi-power text-danger"></i> Logout</a>
+        </div>
+    </div>
+</li>
+{% endblock profile %}
+
+{% block topbarLeft %}
+<div class="topbar-left">
+    <a href="{% url 'patients:patient-homepage' %}" class="logo">
+        <span class="logo-light">
+                <img src="{% static 'assets/images/logo-light.png' %}" alt="" height="16">
+            </span>
+        <span class="logo-sm">
+                <img src="{% static 'assets/images/logo-sm.png' %}" alt="" height="22">
+            </span>
+    </a>
+</div>
+{% endblock topbarLeft %}
+
+{% block sidebarMenu %}
+<div id="sidebar-menu">
+    <!-- Left Menu Start -->
+    <ul class="metismenu" id="side-menu">
+        <li class="menu-title">Overview</li>
+        <li>
+            <a href="{% url 'patients:patient-homepage' %}" class="waves-effect">
+                <i class="ion ion-md-speedometer"></i>
+                <!-- <span class="badge badge-success badge-pill float-right">2</span> -->
+                <span> Dashboard </span>
+            </a>
+        </li>
+
+    </ul>
+
+</div>
+{% endblock sidebarMenu %}

@@ -1,0 +1,150 @@
+#notification-grid {
+  display: flex;
+  width: 100%;
+  height: 280px;
+  padding: .75rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.2), 5px 6px 9px 0 rgba(0, 0, 0, 0.19);
+}
+
+#temp-grid {
+ padding: 20px;
+}
+
+#temp-grid i {
+  font-size: 50px !important;
+}
+
+#temp-grid p {
+  padding-top: 10px;
+}
+
+#badgeGrid a i {
+  display: block;
+  font-size: 150px;
+  color: #c5c7ca;
+  text-align: center;
+}
+
+#badgeGrid a p {
+  text-align: center;
+  display: block;
+  color: inherit;
+}
+
+.card-container {
+  height: 280px;
+  width: 100%;
+  padding: 10px;
+}
+
+.column {
+  width: 50%;
+  margin-bottom: 2%;
+}
+
+.row {
+  padding-top: 5px;
+}
+
+.icon-centered {
+  margin: auto;
+}
+
+.flex-container {
+  display: flex;
+  flex-wrap: wrap;
+  flex-flow: row wrap;
+  margin: auto;
+  justify-content: space-around;
+  align-content: center;
+}
+
+@media only screen and (max-width: 1238px) {
+  #temp-grid {
+    width: 50%;
+    padding: 0%;
+    font-size: 1.1em !important;
+  }
+
+  #temp-grid i {
+    font-size: 25px !important;
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+  #temp-grid {
+    width: 50%;
+    padding: 0%;
+    font-size: 1.1em !important;
+  }
+
+  #temp-grid i {
+    font-size: 25px !important;
+  }
+
+  #badgeGrid {
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+  }
+
+  .column {
+    width: 100%;
+    margin-bottom: 40%;
+    margin-left: 5%;
+    margin-right: 5%;
+
+    /*margin-left: 10%;
+    margin-right: 10%;*/
+  }
+  .card-container {
+    height: 80px;
+    padding: 5px;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  #sidebar {
+    margin-left: -100px !important;
+  }
+  #temp-grid {
+    width: 50%;
+    padding: 0%;
+    font-size: 1.1em !important;
+  }
+
+  #temp-grid i {
+    font-size: 25px !important;
+  }
+
+  #badgeGrid {
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+  }
+
+  .container {
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+
+  .column {
+    width: 100%;
+    margin-bottom: 15em;
+    margin-left: 10%;
+    margin-right: 10%;
+
+    /*margin-left: 10%;
+    margin-right: 10%;*/
+  }
+
+  .card-container {
+    height: 80px;
+    padding: 5px;
+  }
+
+  .row {
+    padding-top: 5px;
+    margin-left: 0px;
+    margin-right: 0px;
+  }
+}

@@ -1,0 +1,36 @@
+
+from django import forms
+from django.contrib.auth.models import User
+from django.forms.models import ModelForm
+
+from accounts.models import UserProfile
+from doctors.models import Doctor
+
+
+class ProfileForm(ModelForm):
+    class Meta:
+        model = UserProfile
+        fields = ('gender',)
+
+
+class UserForm(ModelForm):
+    password = forms.CharField(widget=forms.PasswordInput)
+    # include another password field for validation
+
+    class Meta:
+        model = User
+        fields = ('username','first_name','last_name', 'password', 'email')
+
+    def save(self, commit=True):
+        new_user = User.objects.create_user(self.cleaned_data['username'],
+                                            self.cleaned_data['email'],
+                                            self.cleaned_data['password'])
+        if commit:
+            new_user.save()
+        return new_user
+
+
+class DoctorForm(ModelForm):
+    class Meta:
+        model = Doctor
+        fields = ('specialty',)

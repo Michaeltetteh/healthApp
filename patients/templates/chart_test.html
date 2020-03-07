@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static '/patients/css/charts.css' %}">
+{% endblock %}
+
+{% block content %}
+<h1>Chart Test</h1>
+<p>Connect to models to display chart data</p>
+
+<div class="chart-container">
+  <canvas id="kitchen-temp" width="300" height="300"></canvas>
+</div>
+{% endblock %}
+
+{% block jquery %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.js" type="text/javascript"></script>
+<script src="{% static '/patients/js/charts.js' %}" type="text/javascript"></script>
+{% endblock %}
+
+</blockquote>

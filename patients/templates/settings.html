@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container-fluid">
+  <div class="jumbotron" style="box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.2), 5px 6px 9px 0 rgba(0, 0, 0, 0.19);">
+    <h1>Settings</h1>
+    <ul class="list-unstyled">
+      <li id="theme">
+        Theme
+      </li>
+      <li id="default">
+        Default View
+      </li>
+      <li>
+        Other
+      </li>
+    </ul>
+  </div>
+</div>
+{% endblock %}
+
+{% block jquery %}
+<script src="{% static '/api_app/js/settings.js' %}" type="text/javascript"></script>
+
+<script type="text/javascript">
+  $(document).ready(function () {
+    $("#settings-link").attr('class','active');
+  })
+</script>
+
+{% endblock %}

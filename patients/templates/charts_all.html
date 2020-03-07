@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'patients/css/notification.css' %}">
+<link rel="stylesheet" href="{% static '/patients/css/charts.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<!-- This is the non-rearrangeable version-->
+<div class="container" id="badgeGrid">
+  <div class="row">
+    <div class="column">
+      <div class="card-container">
+        <div class="jumbotron" id="notification-grid">
+          <canvas id="tee-pulse"></canvas>
+        </div>
+      </div>
+    </div>
+    <div class="column">
+      <div class="card-container">
+        <div class="jumbotron" id="notification-grid">
+          <canvas id="mancave-temp"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+ <!--  <div class="row">
+    <div class="column">
+      <div class="card-container">
+        <div class="jumbotron" id="notification-grid">
+          <canvas id="livingroom-temp"></canvas>
+        </div>
+      </div>
+    </div>
+    <div class="column">
+      <div class="card-container">
+        <div class="jumbotron" id="notification-grid">
+          <canvas id="bedroom-temp"></canvas>
+        </div>
+      </div>
+    </div>
+  </div> -->
+<!--   <div class="row" style="visibility: hidden;">
+    <div class="column">
+      <div class="card-container">
+        <div class="jumbotron" id="notification-grid">
+          <canvas id="other-temp"></canvas>
+        </div>
+      </div>
+    </div>
+    <div class="column">
+      <div class="card-container">
+        <div class="jumbotron" id="notification-grid">
+          <canvas id="other-temp"></canvas>
+        </div>
+      </div>
+    </div>
+  </div> -->
+</div>
+
+{% endblock %}
+
+{% block jquery %}
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.bundle.js" type="text/javascript"></script>-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.js" type="text/javascript"></script>
+<script src="{% static '/patients/js/charts.js' %}" type="text/javascript"></script>
+
+<script type="text/javascript">
+  $(window).on('load', function () {
+    $("#temp-link").attr('class','active');
+    var TeeChart = chartPulse("tee", 30, false);
+    // var LivingRoomChart = chartTemps("livingroom", 30, false);
+    // var BedroomChart = chartTemps("bedroom", 30, false);
+    // var ManCaveChart = chartTemps("mancave", 30, false);
+  })
+</script>
+
+{% endblock %}

@@ -20,7 +20,9 @@ function chartTemps_all(datapoints, isDisplayEnabled) {
 
 function chartPulse(device, datapoints, isDisplayEnabled) {
   //had to use the absolute path
-  $.getJSON('http://127.0.0.1:8000/api/pulse/' + device + '/' + datapoints, {
+  // replace on local run 
+  //$.getJSON('http://127.0.0.1:8000/api/pulse/' + device + '/' + datapoints, {
+  $.getJSON('https://healthapp-prod.herokuapp.com/api/pulse/' + device + '/' + datapoints, {
   }).done(function(data){
     console.log(data);
     console.log(data.reverse());

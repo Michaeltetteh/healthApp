@@ -15,7 +15,7 @@ urlpatterns = [
     path('',include('accounts.urls')),
     # path('v1/api/',include('accounts.urls')),
     path('patient/',include('patients.urls')),
-    path('doctor/',include('doctors.urls')),
+    path('doctor/',include('doctors.urls',namespace='doctor')),
     path('chart/', include('chart.urls')),
     path('admin/', admin.site.urls),
 

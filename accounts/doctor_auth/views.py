@@ -1,10 +1,10 @@
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.http import HttpResponse
+from django.http import HttpResponse,HttpResponseRedirect
 from django.shortcuts import redirect
 from django.views.generic import TemplateView
 from django.views.generic.base import View
-
+from django.urls import reverse
 
 
 from .forms import ProfileForm,UserForm,DoctorForm
@@ -32,9 +32,11 @@ class SignUpView(TemplateView):
             profile.save()
             doctor.user = profile
             doctor.save()
-            return HttpResponse("Signed Up!<br><a href='/'>Go to home</a>")
+            redirect_home = reverse('doctor:doctor-homepage')#, kwargs={'message': 'User created','user':user})
+            return HttpResponseRedirect(redirect_home)
         else:
-            return HttpResponse("Error : <a href='/signup'>Try again</a>!")
+            redirect_signup = reverse('accounts:doctor_register')#, kwargs={'message': "form error please check you detials"})
+            return HttpResponseRedirect(redirect_signup)
 
 
 class LoginView(TemplateView):

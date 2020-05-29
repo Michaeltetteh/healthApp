@@ -117,7 +117,12 @@ def signup_api(request):
                     )
 
                 doctor_instance = User.objects.get(username=doctors)
-                doctor = Doctor.objects.get(pk=doctor_instance.id)
+                # print(doctor_instance)
+                # print(doctor_instance.id)
+                user_prof = UserProfile.objects.get(user=doctor_instance.id)
+                # print("UserProfile",user_prof)
+                doctor = Doctor.objects.get(pk=user_prof.id)
+                # print(doctor)
                 patient = Patient.objects.create(
                     user = user_profile,
                     doctor_id = doctor,

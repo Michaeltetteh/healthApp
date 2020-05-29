@@ -49,7 +49,7 @@ class LoginView(TemplateView):
             user = authenticate(request, username=username, password=password)
             if user is not None:
                 login(request, user)
-                return HttpResponseRedirect(reverse('doctors:doctor-homepage',args=['test']))
+                return HttpResponseRedirect(reverse('doctors:doctor-homepage'))
             else:
                 return HttpResponse('Error: User authentication error <a href="/login"">Try again</a>')
         else:

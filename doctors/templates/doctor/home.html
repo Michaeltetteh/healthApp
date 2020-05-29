@@ -29,17 +29,18 @@
     <!-- end page-title -->
 
     <div class="row">
+        {% for patient in patients %}
         <div class="col-lg-4">
             <div class="card mini-stat bg-pattern">
                 <div class="card-body mini-stat-img">
                     <div class="mini-stat-icon">
                         <i class="dripicons-broadcast bg-soft-primary text-primary float-right h4"></i>
                     </div>
-                    <h6 class="text-uppercase mb-3 mt-0">Patient 1</h6>
-                    <h5 class="mb-3">22</h5>
+                    <h6 class="text-uppercase mb-3 mt-0">{{patient.user}}</h6>
+                    <h5 class="mb-3">pulse/Temp</h5>
                     <div class="row">
                         <div class="col">
-                            <a href="{% url 'pulse_chart' 'tee'%}">
+                            <a href="{% url 'pulse_chart' patient.device_serial%}">
                                 <button type="button" class="btn btn-primary btn-icon">
                                     <span class="btn-icon-label"><i class="mdi mdi-bullseye-arrow mr-2"></i></span> Pulse
                                 </button>
@@ -55,78 +56,8 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-4">
-            <div class="card mini-stat bg-pattern">
-                <div class="card-body mini-stat-img">
-                    <div class="mini-stat-icon">
-                        <i class="dripicons-box bg-soft-primary text-primary float-right h4"></i>
-                    </div>
-                    <h6 class="text-uppercase mb-3 mt-0">Patient 2</h6>
-                    <h5 class="mb-3">48</h5>
-                    <div class="row">
-                        <div class="col">
-                            <button type="button" class="btn btn-primary btn-icon">
-                                <span class="btn-icon-label"><i class="mdi mdi-bullseye-arrow mr-2"></i></span> Pulse
-                            </button>
+        {% endfor %}
 
-                        </div>
-                        <div class="col">
-                            <button type="button" class="btn btn-warning btn-icon">
-                                <span class="btn-icon-label"><i class="mdi mdi-alert-outline mr-2"></i></span> Warning
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-4">
-            <div class="card mini-stat bg-pattern">
-                <div class="card-body mini-stat-img">
-                    <div class="mini-stat-icon">
-                        <i class="dripicons-tags bg-soft-primary text-primary float-right h4"></i>
-                    </div>
-                    <h6 class="text-uppercase mb-3 mt-0">Patient 3</h6>
-                    <h5 class="mb-3">14.6</h5>
-                    <div class="row">
-                        <div class="col">
-                            <button type="button" class="btn btn-primary btn-icon">
-                                <span class="btn-icon-label"><i class="mdi mdi-bullseye-arrow mr-2"></i></span> Pulse
-                            </button>
-
-                        </div>
-                        <div class="col">
-                            <button type="button" class="btn btn-warning btn-icon">
-                                <span class="btn-icon-label"><i class="mdi mdi-alert-outline mr-2"></i></span> Warning
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-4">
-            <div class="card mini-stat bg-pattern">
-                <div class="card-body mini-stat-img">
-                    <div class="mini-stat-icon">
-                        <i class="dripicons-tags bg-soft-primary text-primary float-right h4"></i>
-                    </div>
-                    <h6 class="text-uppercase mb-3 mt-0">Patient 4</h6>
-                    <h5 class="mb-3">14.6</h5>
-                    <div class="row">
-                        <div class="col">
-                            <button type="button" class="btn btn-primary btn-icon">
-                                <span class="btn-icon-label"><i class="mdi mdi-bullseye-arrow mr-2"></i></span> Pulse
-                            </button>
-
-                        </div>
-                        <div class="col">
-                            <button type="button" class="btn btn-warning btn-icon">
-                                <span class="btn-icon-label"><i class="mdi mdi-alert-outline mr-2"></i></span> Warning
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
     <!-- end row -->
 </div>

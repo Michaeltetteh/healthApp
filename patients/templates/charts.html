@@ -1,6 +1,12 @@
-{% extends 'base.html' %} {% load static %} {% block head %}
+{% extends 'base.html' %} 
+{% load static %} 
+
+{% block head %}
 <link rel="stylesheet" href="{% static '/patients/css/notification.css' %}">
-<link rel="stylesheet" href="{% static '/patients/css/charts.css' %}"> {% endblock %} {% block chart %}
+<link rel="stylesheet" href="{% static '/patients/css/charts.css' %}"> 
+{% endblock %} 
+
+{% block chart %}
 <div class="container-fluid">
     <div class="jumbotron" id="chart-jumbo">
         <div class="dropdown-animation form-row">
@@ -23,7 +29,9 @@
         </div>
     </div>
 </div>
-{% endblock %} {% block jquery %}
+{% endblock %} 
+
+{% block jquery %}
 <script type="text/javascript">
     var deviceValue = "{{device}}";
 </script>
@@ -47,4 +55,83 @@
 
 {% endblock %}
 
-</blockquote>
+
+{% block sidebar %}
+                        <!-- ========== Left Sidebar Start ========== -->
+        <div class="left side-menu">
+            <div class="slimscroll-menu" id="remove-scroll">
+
+                <!--- Sidemenu -->
+                <div id="sidebar-menu">
+                    <!-- Left Menu Start -->
+                    <ul class="metismenu" id="side-menu">
+                        <li class="menu-title">Overview</li>
+                        <li>
+                            <a href="{% url 'doctors:doctor-homepage' %}" class="waves-effect">
+                                <i class="ion ion-md-speedometer"></i>
+                                <!-- <span class="badge badge-success badge-pill float-right">2</span> -->
+                                <span> Dashboard </span>
+                            </a>
+                        </li>
+
+                    </ul>
+
+                </div>
+                <!-- Sidebar -->
+                <div class="clearfix"></div>
+
+            </div>
+            <!-- Sidebar -left -->
+
+        </div>
+        <!-- Left Sidebar End -->
+{% endblock sidebar %}
+
+{% block profile %}
+<li class="dropdown notification-list list-inline-item">
+    <div class="dropdown notification-list nav-pro-img">
+        <a class="dropdown-toggle nav-link arrow-none nav-user" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+            <img src="{% static 'assets/images/users/user-2.jpg' %}" alt="user" class="rounded-circle">
+        </a>
+        <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
+            <!-- item-->
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item text-danger" href="{% url 'accounts:doctor-logout' %}">
+            <i class="mdi mdi-power text-danger"></i> Logout</a>
+        </div>
+    </div>
+</li>
+{% endblock profile %}
+
+
+
+{% block topbarLeft %}
+<div class="topbar-left">
+    <a href="{% url 'doctors:doctor-homepage' %}" class="logo">
+        <span class="logo-light">
+                <img src="{% static 'assets/images/logo-light.png' %}" alt="" height="16">
+            </span>
+        <span class="logo-sm">
+                <img src="{% static 'assets/images/logo-sm.png' %}" alt="" height="22">
+            </span>
+    </a>
+</div>
+{% endblock topbarLeft %}
+
+{% block sidebarMenu %}
+<div id="sidebar-menu">
+    <!-- Left Menu Start -->
+    <ul class="metismenu" id="side-menu">
+        <li class="menu-title">Overview</li>
+        <li>
+            <a href="{% url 'doctors:doctor-homepage' %}" class="waves-effect">
+                <i class="ion ion-md-speedometer"></i>
+                <!-- <span class="badge badge-success badge-pill float-right">2</span> -->
+                <span> Dashboard </span>
+            </a>
+        </li>
+
+    </ul>
+
+</div>
+{% endblock sidebarMenu %}

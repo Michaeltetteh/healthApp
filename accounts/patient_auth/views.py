@@ -6,6 +6,12 @@ from django.views.generic import TemplateView
 from django.views.generic.base import View
 
 from .forms import UserForm,ProfileForm,PatientForm
+from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth.models import User
+import json
+from django.core import serializers
+from django.http import HttpResponse, JsonResponse
+
 
 # class Index(TemplateView):
 #     template_name = 'patient/index.html'
@@ -69,3 +75,83 @@ class LogoutView(View, LoginRequiredMixin):
     def get(self, request):
         logout(request)
         return redirect('/') #redirects to doctors login page will fix that
+
+
+# def login_api(request):
+#     return "login"
+
+from .utils import validate_username_and_password,validateEmail
+from accounts.models import UserProfile
+from patients.models import Patient
+from doctors.models import Doctor
+
+@csrf_exempt
+def signup_api(request):
+    if request.method == 'POST':
+        received_json_data = json.loads(request.body.decode("utf-8"))
+
+        username = received_json_data.get('username')
+        password = received_json_data.get('password')
+        confirm_password = received_json_data.get('confirm_password')
+        first_name = received_json_data.get('first_name')
+        last_name = received_json_data.get('last_name')
+        email = received_json_data.get('email')
+        gender = received_json_data.get('gender')
+        doctors = received_json_data.get('doctors')
+        serial_number= received_json_data.get('serial')
+
+        if validate_username_and_password(username,password,confirm_password) == 'valid':
+            if validateEmail(email):
+                
+                user = User.objects.create_user(
+                    first_name = first_name,
+                    last_name = last_name,
+                    username = username,
+                    email = email,
+                    password = password,
+                    )
+                
+                user_profile =UserProfile.objects.create(
+                    user = user,
+                    gender = gender
+                    )
+
+                doctor_instance = User.objects.get(username=doctors)
+                doctor = Doctor.objects.get(pk=doctor_instance.id)
+                patient = Patient.objects.create(
+                    user = user_profile,
+                    doctor_id = doctor,
+                    device_serial = serial_number
+                    )
+
+                response = json.dumps({'status':'success', 'result':user.id})
+            else:
+                response = json.dumps({'status':'error','result':"Email not valid"})
+        else:
+            response = json.dumps({'status':'error','result':"Username/password error"})
+    return HttpResponse(response, content_type='application/json')
+
+
+@csrf_exempt
+def login_api(request):
+    if request.method == 'POST':
+        received_json_data = json.loads(request.body.decode("utf-8"))
+        username = received_json_data.get('username')
+        password = received_json_data.get('password')
+
+        if username and password:
+            user = authenticate(request, username=username, password=password)
+            if user is not None:
+                user_serial = User.objects.get(pk= user.id)
+                    # user = login(request, user)
+                response = json.dumps({'status': 'ok', 'user_id': user_serial.id})
+            else:
+                response = json.dumps({'status': 'error', 'result': "Wrong username or password"})
+        else:
+            response = json.dumps({'status': 'error', 'result': "Username or password not provided"})
+    else:
+        response = json.dumps({'status': 'error', 'result': "something went wrong"})
+
+    return HttpResponse(response, content_type='application/json')
+
+

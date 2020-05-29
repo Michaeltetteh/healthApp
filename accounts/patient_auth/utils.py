@@ -5,6 +5,32 @@ from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 
 
+from django.forms import forms
+from django.contrib.auth.models import User
+from django.core.validators import validate_email
+from django.core.exceptions import ValidationError
+
+
+def validate_username_and_password(username,password,confirm_password):
+    if " " in username:
+        raise ValidationError("Username cannot contain any spaces")
+    if not (password == confirm_password):
+        return "pasword mismatch"
+    # if User.objects.filter(username).exists():
+    #     return "user exists"
+
+    return 'valid'
+
+
+def validateEmail(email):
+    try:
+        validate_email( email )
+        return True
+    except ValidationError:
+        return False
+
+
+
 def send_mail(to, template, context):
     html_content = render_to_string(f'accounts/emails/{template}.html', context)
     text_content = render_to_string(f'accounts/emails/{template}.txt', context)

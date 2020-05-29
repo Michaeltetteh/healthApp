@@ -13,6 +13,7 @@ admin.site.index_title = "HealthApi"
 urlpatterns = [
     # path('',include('accounts.api.user_auth_api.urls')),
     path('',include('accounts.urls')),
+    # path('v1/api/',include('accounts.urls')),
     path('patient/',include('patients.urls')),
     path('doctor/',include('doctors.urls')),
     path('chart/', include('chart.urls')),

@@ -18,10 +18,11 @@ def index(request):
 def post_pulse(request):
     if request.method == "POST":
         # print('Connected to view...')
-        received_data = json.loads(request.body)
-        print(received_data)
-        print(received_data['device'])
-        print(received_data['pulse_bpm'])
+        # received_data = json.loads(request.body)
+        received_json_data = json.loads(request.body.decode("utf-8"))
+        print(received_json_data)
+        print(received_json_data['device'])
+        print(received_json_data['pulse_bpm'])
 
         serializer = pulseserializer(
             data={ #Must match model
@@ -41,3 +42,4 @@ def post_pulse(request):
     else:
         return HttpResponse('')
 
+#TODO change HttpResponse to JsonResponse

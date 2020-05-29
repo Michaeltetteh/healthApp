@@ -4,7 +4,7 @@ from .views import HomePage
 app_name = 'doctors'
 
 urlpatterns = [
-    path('home/',HomePage,name='doctor-homepage'),
+    path('home/',HomePage,kwargs={},name='doctor-homepage'),
 ]
 
 

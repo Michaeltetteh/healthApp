@@ -1,0 +1,76 @@
+canvas {
+  border-bottom-right-radius: 0.7rem;
+}
+
+.chart-container {
+  /**height: 280px;**/
+  position: relative;
+  min-height: 500px;
+  width: 100%;
+  padding: 10px;
+  display: flex;
+}
+
+.form-chart {
+  display: flex;
+  margin-left: auto;
+  margin-top: 10px;
+}
+
+.form-chart .check {
+  height: 35px;
+}
+
+.form-chart .submitBt {
+  height: 35px;
+}
+
+#chart-jumbo {
+  margin: 15px;
+}
+
+#sandwichDropdown {
+  margin-top: 10px;
+  margin-left: auto;
+  font-size: 1.4rem;
+}
+
+#sandwichDropdown i {
+  color: #c5c7ca;
+}
+
+#sandwichDropdown {
+  background-color: #0000 !important;
+}
+
+.vBt {
+  width: 40px;
+}
+
+.dropdown-container {
+  background-color: #dee0e4ba;
+  padding: 8px;
+}
+
+.dpCounter {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+
+.dropdown-input {
+  margin-left: 5px;
+  margin-right: 5px;
+  padding: 0.25rem !important;
+  height: 38px;
+  width: 35px;
+  min-width: 35px;
+  flex-grow: 1;
+  border: solid 1px #29292942;
+
+}
+
+.dropdown-submit {
+  margin-top: 5px;
+  width: 100%;
+}

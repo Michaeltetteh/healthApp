@@ -17,5 +17,6 @@ from django.contrib.auth.decorators import login_required
 
 
 @login_required
-def HomePage(request):
-    return render(request, "doctor/home.html")
+def HomePage(request,*args,**kwargs):
+	print(user)
+	return render(request, "doctor/home.html")

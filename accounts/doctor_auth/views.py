@@ -1,7 +1,7 @@
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponse,HttpResponseRedirect
-from django.shortcuts import redirect
+from django.shortcuts import redirect,render
 from django.views.generic import TemplateView
 from django.views.generic.base import View
 from django.urls import reverse
@@ -32,7 +32,7 @@ class SignUpView(TemplateView):
             profile.save()
             doctor.user = profile
             doctor.save()
-            redirect_home = reverse('doctor:doctor-homepage')#, kwargs={'message': 'User created','user':user})
+            redirect_home = reverse('doctor:doctor-homepage', kwargs={'message': 'User created','user':user})
             return HttpResponseRedirect(redirect_home)
         else:
             redirect_signup = reverse('accounts:doctor_register')#, kwargs={'message': "form error please check you detials"})
@@ -49,7 +49,7 @@ class LoginView(TemplateView):
             user = authenticate(request, username=username, password=password)
             if user is not None:
                 login(request, user)
-                return redirect('doctors:doctor-homepage')
+                return HttpResponseRedirect(reverse('doctors:doctor-homepage',args=['test']))
             else:
                 return HttpResponse('Error: User authentication error <a href="/login"">Try again</a>')
         else:

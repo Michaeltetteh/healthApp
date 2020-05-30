@@ -21,20 +21,6 @@ def post_vitals(request):
         # received_data = json.loads(request.body)
         received_json_data = json.loads(request.body.decode("utf-8"))
         print(received_json_data)
-        # print(received_json_data['device_serial_number'])
-        # print(received_json_data['pulse_bpm'])
-
-        # serializer = pulseserializer(
-        #     data={ #Must match model
-        #         'date': datetime.datetime.now(),
-        #         'device_serial_number': received_json_data['device_serial_number'],
-        #         'pulse_bpm': received_json_data['pulse_bpm'],
-        #         'temperature': received_json_data['temperature']
-        #         })
-        # patient_instance = Patient.objects.get(device_serial=received_json_data['device_serial_number'])
-        # print(patient_instance)
-        # print(patient_instance.user.id)
-        # print(patient_instance.device_serial)
 
         data = PulseModel.objects.create(
             date = timezone.now,
@@ -43,9 +29,7 @@ def post_vitals(request):
             temperature = received_json_data['temperature'],
             )
 
-        # if serializer.is_valid():
         if data:
-            # serializer.save()
             response = JsonResponse({"status":"OK","msg":"Uploaded"})
         else:
             print("Data not valid")
@@ -54,5 +38,3 @@ def post_vitals(request):
         return response
     else:
         return JsonResponse({"status":"NOT FOUND","msg":"method not found"})
-
-#TODO change HttpResponse to JsonResponse

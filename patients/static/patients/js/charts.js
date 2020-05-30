@@ -1,6 +1,6 @@
 function chartTemps_all(datapoints, isDisplayEnabled) {
   //Get API data
-  $.getJSON('api/PulseModel/', {
+  $.getJSON('api/vitals/', {
     format: "json"
   }).done(function(data){
     console.log(data);
@@ -22,7 +22,7 @@ function chartPulse(device, datapoints, isDisplayEnabled) {
   //had to use the absolute path
   // replace on local run 
   //$.getJSON('http://127.0.0.1:8000/api/pulse/' + device + '/' + datapoints, {
-  $.getJSON('https://healthapp-prod.herokuapp.com/api/pulse/' + device + '/' + datapoints, {
+  $.getJSON('http://localhost:8000/api/pulse/' + device + '/' + datapoints, {
   }).done(function(data){
     console.log(data);
     console.log(data.reverse());

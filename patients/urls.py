@@ -4,7 +4,7 @@ from django.urls import path,include
 from . import viewsets,views
 
 router = routers.DefaultRouter()
-router.register(r'PulseModel', viewsets.PulseViewSet)
+router.register(r'vitals', viewsets.VitalsViewSet)
 
 app_name = 'patients'
 

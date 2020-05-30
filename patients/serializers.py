@@ -12,8 +12,10 @@ class pulseserializer(serializers.ModelSerializer):
         new_BPM = PulseModel(
             #date = datetime.datetime.now(),
             date = validated_data['date'],
-            device = validated_data['device'],
-            pulse_bpm = validated_data['pulse_bpm'])
+            device_serial_number = validated_data['device_serial_number'],
+            pulse_bpm = validated_data['pulse_bpm'],
+            temperature = validated_data['temperature'],
+            )
 
         new_BPM.save()
 

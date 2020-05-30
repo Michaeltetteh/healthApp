@@ -17,3 +17,7 @@ def pulse_chart(request, device):
 def all_pulse_charts(request):
     return render(request, "charts_all.html", {'device': "All Pulse"})
 
+def temp_chart(request, device):
+    device = device.capitalize()
+    # print("DEVICE:",device)
+    return render(request, "charts.html", {'device': device})

@@ -21,12 +21,13 @@ from accounts.models import UserProfile
 
 @login_required
 def HomePage(request,*args,**kwargs):
-# 	username = None
-#     if request.user.is_authenticated():
-#     	username = request.user.username
-#     	print(username)
+	# username = None
+	# if request.user:
+	# 	username = request.user.username
+	# 	print(username)
+
 	print(request.user.id)
-	user_profile = UserProfile.objects.get(user=request.user.id)
+	user_profile = UserProfile.objects.get(user=request.user)
 	print(user_profile.id)
 	patients = Patient.objects.filter(doctor_id=user_profile.id)
 	print(patients)

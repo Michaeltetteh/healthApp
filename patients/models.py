@@ -16,15 +16,10 @@ class Patient(models.Model):
 
 class PulseModel(models.Model):
 
-    date = models.DateTimeField(auto_now=False)
-    # device = models.CharField(max_length=20)
-    device_serial_number = models.OneToOneField(Patient,on_delete=models.CASCADE)
+    date = models.DateTimeField(auto_now=True)
+    device_serial_number = models.CharField(max_length=50)
     pulse_bpm = models.FloatField(max_length=5)
+    temperature = models.FloatField(max_length=5)
 
     def __str__(self):
-    	return self.device 
-
-
-
-
-    
+    	return self.device_serial_number 

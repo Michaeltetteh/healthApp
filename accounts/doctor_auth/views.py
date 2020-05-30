@@ -32,7 +32,7 @@ class SignUpView(TemplateView):
             profile.save()
             doctor.user = profile
             doctor.save()
-            redirect_home = reverse('doctor:doctor-homepage', kwargs={'message': 'User created','user':user})
+            redirect_home = reverse('doctor:doctor-homepage')#, kwargs={'message': 'User created','user':user})
             return HttpResponseRedirect(redirect_home)
         else:
             redirect_signup = reverse('accounts:doctor_register')#, kwargs={'message': "form error please check you detials"})
@@ -51,9 +51,11 @@ class LoginView(TemplateView):
                 login(request, user)
                 return HttpResponseRedirect(reverse('doctors:doctor-homepage'))
             else:
-                return HttpResponse('Error: User authentication error <a href="/login"">Try again</a>')
+                redirect_login_page = reverse('accounts:doctor-login')#, kwargs={'message': "form error please check you detials"})
+                return HttpResponseRedirect(redirect_login_page)
         else:
-            return HttpResponse('Error: Username or password is empty <a href="/login">Try again</a>')
+            redirect_login_page = reverse('accounts:doctor-login')#, kwargs={'message': "form error please check you detials"})
+            return HttpResponseRedirect(redirect_login_page)
 
 
 class LogoutView(View, LoginRequiredMixin):

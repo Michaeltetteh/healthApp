@@ -24,57 +24,57 @@ from django.http import HttpResponse, JsonResponse
 #         return ctx
 
 
-class SignUpView(TemplateView):
-    template_name = 'pat/register.html'
+# class SignUpView(TemplateView):
+#     template_name = 'pat/register.html'
 
-    def get_context_data(self, **kwargs):
-        ctx = super(SignUpView, self).get_context_data(**kwargs)
-        ctx['user_form'] = UserForm(prefix='user')
-        ctx['profile_form'] = ProfileForm(prefix='profile')
-        ctx['patient_form'] = PatientForm(prefix='patient')
-        print(ctx)
-        return ctx
+#     def get_context_data(self, **kwargs):
+#         ctx = super(SignUpView, self).get_context_data(**kwargs)
+#         ctx['user_form'] = UserForm(prefix='user')
+#         ctx['profile_form'] = ProfileForm(prefix='profile')
+#         ctx['patient_form'] = PatientForm(prefix='patient')
+#         print(ctx)
+#         return ctx
 
-    def post(self, request, *args, **kwargs):
-        user_form = UserForm(request.POST, prefix='user')
-        patient_form = PatientForm(request.POST,prefix='patient')
-        profile_form = ProfileForm(request.POST, request.FILES, prefix='profile')
-        if profile_form.is_valid() and user_form.is_valid() and patient_form.is_valid():
-            user = user_form.save(commit=False)
-            profile = profile_form.save(commit=False)
-            patient = patient_form.save(commit=False)
-            user.save()
-            profile.user = user
-            profile.save()
-            patient.user = profile
-            # patient.doctor_id = patient_form 
-            patient.save()
-            return HttpResponse("Signed Up!<br><a href='/'>Go to home</a>")
-        else:
-            return HttpResponse("Error : <a href='/signup'>Try again</a>!")
-
-
-class LoginView(TemplateView):
-    template_name = 'pat/login.html'
-
-    def post(self, request, *args, **kwargs):
-        username = request.POST.get('username', False)
-        password = request.POST.get('password', False)
-        if username and password:
-            user = authenticate(request, username=username, password=password)
-            if user is not None:
-                login(request, user)
-                return redirect('patients:patient-homepage')
-            else:
-                return HttpResponse('Error: User authentication error <a href="/login"">Try again</a>')
-        else:
-            return HttpResponse('Error: Username or password is empty <a href="/login">Try again</a>')
+#     def post(self, request, *args, **kwargs):
+#         user_form = UserForm(request.POST, prefix='user')
+#         patient_form = PatientForm(request.POST,prefix='patient')
+#         profile_form = ProfileForm(request.POST, request.FILES, prefix='profile')
+#         if profile_form.is_valid() and user_form.is_valid() and patient_form.is_valid():
+#             user = user_form.save(commit=False)
+#             profile = profile_form.save(commit=False)
+#             patient = patient_form.save(commit=False)
+#             user.save()
+#             profile.user = user
+#             profile.save()
+#             patient.user = profile
+#             # patient.doctor_id = patient_form 
+#             patient.save()
+#             return HttpResponse("Signed Up!<br><a href='/'>Go to home</a>")
+#         else:
+#             return HttpResponse("Error : <a href='/signup'>Try again</a>!")
 
 
-class LogoutView(View, LoginRequiredMixin):
-    def get(self, request):
-        logout(request)
-        return redirect('/') #redirects to doctors login page will fix that
+# class LoginView(TemplateView):
+#     template_name = 'pat/login.html'
+
+#     def post(self, request, *args, **kwargs):
+#         username = request.POST.get('username', False)
+#         password = request.POST.get('password', False)
+#         if username and password:
+#             user = authenticate(request, username=username, password=password)
+#             if user is not None:
+#                 login(request, user)
+#                 return redirect('patients:patient-homepage')
+#             else:
+#                 return HttpResponse('Error: User authentication error <a href="/login"">Try again</a>')
+#         else:
+#             return HttpResponse('Error: Username or password is empty <a href="/login">Try again</a>')
+
+
+# class LogoutView(View, LoginRequiredMixin):
+#     def get(self, request):
+#         logout(request)
+#         return redirect('/') #redirects to doctors login page will fix that
 
 
 # def login_api(request):
@@ -82,7 +82,7 @@ class LogoutView(View, LoginRequiredMixin):
 
 from .utils import validate_username_and_password,validateEmail
 from accounts.models import UserProfile
-from patients.models import Patient
+from patients.models import Patient,PulseModel
 from doctors.models import Doctor
 
 @csrf_exempt
@@ -117,19 +117,16 @@ def signup_api(request):
                     )
 
                 doctor_instance = User.objects.get(username=doctors)
-                # print(doctor_instance)
-                # print(doctor_instance.id)
                 user_prof = UserProfile.objects.get(user=doctor_instance.id)
-                # print("UserProfile",user_prof)
                 doctor = Doctor.objects.get(pk=user_prof.id)
-                # print(doctor)
+
                 patient = Patient.objects.create(
                     user = user_profile,
                     doctor_id = doctor,
                     device_serial = serial_number
                     )
 
-                response = json.dumps({'status':'success', 'result':user.id})
+                response = json.dumps({'status':'success', 'user':user_profile.id})
             else:
                 response = json.dumps({'status':'error','result':"Email not valid"})
         else:
@@ -147,9 +144,14 @@ def login_api(request):
         if username and password:
             user = authenticate(request, username=username, password=password)
             if user is not None:
+
                 user_serial = User.objects.get(pk= user.id)
-                    # user = login(request, user)
-                response = json.dumps({'status': 'ok', 'user_id': user_serial.id})
+                user_profile = UserProfile.objects.get(user=user_serial)
+                
+                response = json.dumps({
+                    'status': 'ok', 
+                    'user_profile_id': user_profile.id
+                    })
             else:
                 response = json.dumps({'status': 'error', 'result': "Wrong username or password"})
         else:
@@ -159,4 +161,17 @@ def login_api(request):
 
     return HttpResponse(response, content_type='application/json')
 
+
+def dashboard_api(request,device):
+    if request.method == "GET":
+        obj = PulseModel.objects.filter(device_serial_number=device)
+        data = []
+        for i in obj:
+            data.append({
+                'pulse' : i.pulse_bpm,
+                'temperature' : i.temperature,
+                'date' : i.date
+                })
+
+        return JsonResponse({'status':'ok',"obj":data})
 

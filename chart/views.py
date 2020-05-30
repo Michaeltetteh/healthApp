@@ -20,4 +20,4 @@ def all_pulse_charts(request):
 def temp_chart(request, device):
     device = device.capitalize()
     # print("DEVICE:",device)
-    return render(request, "charts.html", {'device': device})
+    return render(request, "temp_chart.html", {'device': device})

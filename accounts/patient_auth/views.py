@@ -138,8 +138,10 @@ def signup_api(request):
 def login_api(request):
     if request.method == 'POST':
         received_json_data = json.loads(request.body.decode("utf-8"))
-        username = received_json_data.get('username')
-        password = received_json_data.get('password')
+        # username = received_json_data.get('username')
+        # password = received_json_data.get('password')
+        username = request.method.get('username','')
+        password = request.method.get('password','')
 
         if username and password:
             user = authenticate(request, username=username, password=password)

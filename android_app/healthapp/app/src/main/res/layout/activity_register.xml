@@ -1,0 +1,159 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:gradient="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    tools:context="com.example.healthapp.login">
+
+    <com.dynamitechetan.flowinggradient.FlowingGradient
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        gradient:transition_duration = "4000"
+        gradient:transition_drawable="@drawable/trans"
+        />
+
+
+    <!--    <ImageView-->
+    <!--        android:layout_width="180dp"-->
+    <!--        android:layout_height="80dp"-->
+
+    <!--        android:layout_centerHorizontal="true"-->
+    <!--        android:src="@drawable/gameylogo"-->
+    <!--        android:id="@+id/logo"-->
+    <!--        android:layout_margin="20dp"-->
+    <!--        />-->
+<!--    <TextView-->
+<!--        android:layout_width="180dp"-->
+<!--        android:layout_height="80dp"-->
+<!--        android:layout_centerHorizontal="true"-->
+<!--        android:text="@string/app_name"-->
+<!--        android:id="@+id/logo"-->
+<!--        android:layout_margin="20dp"-->
+<!--        android:textColor="#FFFFFF"-->
+<!--        android:textAlignment="center"-->
+<!--        android:textSize="40dp"-->
+<!--        />-->
+
+    <com.github.florent37.materialtextfield.MaterialTextField
+        android:layout_width="270dp"
+        android:layout_height="wrap_content"
+        app:mtf_labelColor="#ffffff"
+        app:mtf_image="@drawable/ic_person"
+        android:id="@+id/usernamefield"
+
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/logo"
+        >
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Username"
+            android:textColor="#333"
+            android:textSize="15sp" />
+
+    </com.github.florent37.materialtextfield.MaterialTextField>
+
+    <com.github.florent37.materialtextfield.MaterialTextField
+        android:layout_width="270dp"
+        android:layout_height="wrap_content"
+        app:mtf_labelColor="#ffffff"
+        app:mtf_image="@drawable/ic_person"
+        android:id="@+id/emailfield"
+
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/usernamefield"
+        >
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Email"
+            android:textColor="#333"
+            android:textSize="15sp" />
+
+    </com.github.florent37.materialtextfield.MaterialTextField>
+
+    <com.github.florent37.materialtextfield.MaterialTextField
+        android:layout_width="270dp"
+        android:layout_height="wrap_content"
+        app:mtf_labelColor="#ffffff"
+        app:mtf_image="@drawable/ic_lock"
+        android:id="@+id/passwordfield"
+
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/emailfield"
+        >
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Password"
+            android:textColor="#333"
+            android:textSize="15sp"
+            android:inputType="textPassword"/>
+
+    </com.github.florent37.materialtextfield.MaterialTextField>
+
+
+
+    <com.nihaskalam.progressbuttonlibrary.CircularProgressButton
+        android:id="@+id/loginBut"
+        android:layout_width="270dp"
+        android:layout_height="44dp"
+
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/passwordfield"
+        android:layout_marginTop="30dp"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="22sp"
+        app:pb_colorIndicator="@color/pb_green"
+        app:pb_cornerRadius="48dp"
+        app:pb_selectorCancel="@color/pb_cancel_state_selector"
+        app:pb_selectorComplete="@color/pb_green_dark"
+        app:pb_selectorError="@color/pb_red"
+        app:pb_selectorIdle="@color/pb_grey"
+        app:pb_textColorAfterClick="@color/colorPrimary"
+        app:pb_textIdle="Login"
+        app:pb_colorCancelText="@color/pb_orange"
+        app:pb_colorErrorText="@color/pb_blue"
+        app:pb_colorCompleteText="@color/pb_orange"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/loginBut"
+        android:layout_marginTop="@dimen/activity_horizontal_margin"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Dont have an account?."
+            android:textColor="#fff"
+            android:layout_below="@id/loginBut"
+
+            android:id="@+id/noacc"
+            />
+        <TextView
+            android:id="@+id/register"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" Register"
+            android:layout_alignRight="@id/noacc"
+            android:layout_below="@id/loginBut"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:textColor="#fff"
+            android:textStyle="bold"
+            android:textSize="@dimen/activity_horizontal_margin"
+            android:clickable="true"
+            />
+
+    </LinearLayout>
+
+
+</RelativeLayout>
